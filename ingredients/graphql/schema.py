@@ -18,6 +18,7 @@ class Query(graphene.ObjectType):
     all_ingredients = graphene.List(IngredientType)
     all_categories = graphene.List(CategoryType)
     category_by_name = graphene.Field(CategoryType, name=graphene.String(required=True))
+    category_by_id = graphene.Field(CategoryType, id=graphene.String(required=True))
 
     def resolve_all_ingredients(self, info):
         return Ingredient.objects.select_related("category").all()
@@ -28,6 +29,11 @@ class Query(graphene.ObjectType):
     def resolve_category_by_name(self, info, name):
         try:
             return Category.objects.get(name=name)
+        except Category.DoesNotExist:
+            return None
+    def resolve_category_by_id(self, info, id):
+        try:
+            return Category.objects.get(id=id)
         except Category.DoesNotExist:
             return None
 
