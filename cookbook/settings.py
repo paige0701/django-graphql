@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ingredients',
-    'graphene_django'
+    'graphene_django',
 ]
 
 GRAPHENE = {
-    'SCHEMA': 'ingredients.graphql.schema.schema'
+    'SCHEMA': 'cookbook.schema.schema2'
 }
 
 MIDDLEWARE = [
